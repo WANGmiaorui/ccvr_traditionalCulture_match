@@ -1,0 +1,24 @@
+name: Gitleaks
+
+on:
+  push:
+    branches:
+      - master  # 或者你希望扫描的分支
+  pull_request:
+    branches:
+      - master  # 或者你希望扫描的分支
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # 需要扫描所有提交历史
+
+    - name: Run Gitleaks
+      uses: zricethezav/gitleaks-action@master
+      with:
+        config-path: D:\code\cs\push_git_test  # 可选：自定义配置文件路径
+        report-path:D:\code\cs\push_git_test\codecspush_git_testreport.json # 可选：报告输出路径
